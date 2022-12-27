@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Paddle
 
 var up_action = ""
 var down_action = ""

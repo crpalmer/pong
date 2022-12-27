@@ -30,5 +30,6 @@ func _on_RightGoal_body_entered(body):
 		emit_signal("goal_scored")
 
 func _on_goal_scored():
+	$Goal.play()
 	update_jumbotron()
 	emit_signal("new_round_needed")

@@ -20,6 +20,8 @@ func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)
 	if collision:
 		velocity = velocity.bounce(collision.normal)
+		if collision.collider is Paddle: $HitPaddle.play()
+		if collision.collider.name == "Arena": $HitWall.play()
 
 func _on_ball_dropped():
 	drop_ball = true
@@ -31,3 +33,6 @@ func _on_goal_scored():
 
 func _on_RoundTimer_timeout():
 	increase_difficulty = true
+	
+func _on_HitPaddle_finished():
+	$HitPaddle.stop()
