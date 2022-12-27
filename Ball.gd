@@ -6,6 +6,9 @@ var velocity = Vector2(0, 0)
 var difficulty = 1
 var increase_difficulty = false
 
+func _ready():
+	visible = false
+
 func _physics_process(delta):
 	if drop_ball:
 		position = Vector2(0, 0)

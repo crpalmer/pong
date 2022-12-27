@@ -1,10 +1,12 @@
 extends Node2D
 
+signal new_game_needed
 signal new_round_needed
 signal goal_scored
 
 var player1_score = 0
 var player2_score = 0
+var max_score = 11
 
 func _ready():
 	randomize()
@@ -13,7 +15,6 @@ func _ready():
 	$LeftPaddle.down_action = "left_paddle_down"
 	$RightPaddle.up_action = "right_paddle_up"
 	$RightPaddle.down_action = "right_paddle_down"
-	emit_signal("new_round_needed")
 	
 func update_jumbotron():
 	$Jumbotron/Player1Score.text = String(player1_score)
@@ -32,4 +33,5 @@ func _on_RightGoal_body_entered(body):
 func _on_goal_scored():
 	$Goal.play()
 	update_jumbotron()
-	emit_signal("new_round_needed")
+	if player1_score >= max_score or player2_score >= max_score: emit_signal("new_game_needed")
+	else: 	emit_signal("new_round_needed")
