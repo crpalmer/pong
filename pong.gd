@@ -1,6 +1,7 @@
 extends Node2D
 
 signal new_round
+signal goal_scored
 
 var player1_score = 0
 var player2_score = 0
@@ -8,6 +9,10 @@ var player2_score = 0
 func _ready():
 	randomize()
 	update_jumbotron()
+	$LeftPaddle.up_action = "left_paddle_up"
+	$LeftPaddle.down_action = "left_paddle_down"
+	$RightPaddle.up_action = "right_paddle_up"
+	$RightPaddle.down_action = "right_paddle_down"
 	emit_signal("new_round")
 	
 func update_jumbotron():
@@ -15,11 +20,16 @@ func update_jumbotron():
 	$Jumbotron/Player2Score.text = String(player2_score)
 
 func _on_LeftGoal_body_entered(body):
-	player2_score += 1
-	update_jumbotron()
-	emit_signal("new_round")
-
+	if body is Ball:
+		player2_score += 1
+		emit_signal("goal_scored")
+		
 func _on_RightGoal_body_entered(body):
-	player1_score += 1
+	if body is Ball:
+		player1_score += 1
+		emit_signal("goal_scored")
+
+func _on_goal_scored():
+	print_debug("goal")
 	update_jumbotron()
 	emit_signal("new_round")
