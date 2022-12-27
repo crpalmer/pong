@@ -26,16 +26,24 @@ func _physics_process(delta):
 		if collision.collider is Paddle: $HitPaddle.play()
 		if collision.collider.name == "Arena": $HitWall.play()
 
+func _on_new_round_needed():
+	visible = true
+	velocity = Vector2(0, 0)
+	position = Vector2(0, 0)
+	
 func _on_ball_dropped():
 	drop_ball = true
-	set_visible(true)
 
 func _on_goal_scored():
-	set_visible(false)
-	difficulty += 0.1
+	difficulty += 0.025
 
 func _on_RoundTimer_timeout():
 	increase_difficulty = true
 	
 func _on_HitPaddle_finished():
 	$HitPaddle.stop()
+
+func _on_new_game_needed():
+	print_debug("hide")
+	visible = false
+	difficulty = 1

@@ -6,7 +6,7 @@ signal goal_scored
 
 var player1_score = 0
 var player2_score = 0
-var max_score = 11
+export var max_score = 11
 
 func _ready():
 	randomize()
@@ -33,5 +33,17 @@ func _on_RightGoal_body_entered(body):
 func _on_goal_scored():
 	$Goal.play()
 	update_jumbotron()
-	if player1_score >= max_score or player2_score >= max_score: emit_signal("new_game_needed")
-	else: 	emit_signal("new_round_needed")
+	if is_game_over():
+		player1_score = 0
+		player2_score = 0
+		emit_signal("new_game_needed")
+	else: 
+		emit_signal("new_round_needed")
+
+func is_game_over():
+	if player1_score < max_score and player2_score < max_score: return false
+	if abs(player1_score - player2_score) < 2: return false
+	return true
+
+func _on_new_round_needed():
+	update_jumbotron()
