@@ -1,9 +1,7 @@
 extends Timer
 
-func _on_new_round():
+func _on_ball_dropped():
 	start()
-	print_debug("start")
 
-func _on_goal_scored(body):
+func _on_goal_scored():
 	stop()
-	print_debug("stop")

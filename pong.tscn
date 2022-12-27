@@ -7,7 +7,7 @@
 [ext_resource path="res://Jumbotron.gd" type="Script" id=5]
 [ext_resource path="res://pong.gd" type="Script" id=6]
 [ext_resource path="res://RoundTimer.gd" type="Script" id=7]
-[ext_resource path="res://Candy Demo.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://Pong Font.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 11.25, 54.5 )
@@ -36,7 +36,7 @@ extents = Vector2( 5, 145 )
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 7, 146.5 )
 
-[node name="Node2D" type="Node2D"]
+[node name="Pong" type="Node2D"]
 script = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -133,13 +133,13 @@ shape = SubResource( 7 )
 script = ExtResource( 7 )
 
 [connection signal="goal_scored" from="." to="." method="_on_goal_scored"]
+[connection signal="goal_scored" from="." to="Ball" method="_on_goal_scored"]
 [connection signal="goal_scored" from="." to="RoundTimer" method="_on_goal_scored"]
-[connection signal="new_round" from="." to="Jumbotron" method="_on_new_round"]
-[connection signal="new_round" from="." to="Ball" method="_on_new_round"]
-[connection signal="new_round" from="." to="LeftPaddle" method="_on_new_round"]
-[connection signal="new_round" from="." to="RightPaddle" method="_on_new_round"]
-[connection signal="new_round" from="." to="RoundTimer" method="_on_new_round"]
-[connection signal="drop_ball" from="Jumbotron" to="Ball" method="_on_drop_ball"]
+[connection signal="new_round_needed" from="." to="Jumbotron" method="_on_Pong_new_round_needed"]
+[connection signal="ball_dropped" from="Jumbotron" to="Ball" method="_on_ball_dropped"]
+[connection signal="ball_dropped" from="Jumbotron" to="LeftPaddle" method="_on_ball_dropped"]
+[connection signal="ball_dropped" from="Jumbotron" to="RightPaddle" method="_on_ball_dropped"]
+[connection signal="ball_dropped" from="Jumbotron" to="RoundTimer" method="_on_ball_dropped"]
 [connection signal="body_entered" from="LeftGoal" to="." method="_on_LeftGoal_body_entered"]
 [connection signal="body_entered" from="RightGoal" to="." method="_on_RightGoal_body_entered"]
 [connection signal="timeout" from="RoundTimer" to="Ball" method="_on_RoundTimer_timeout"]
