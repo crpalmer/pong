@@ -177,6 +177,13 @@ script = ExtResource( 5 )
 [node name="Goal" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 
+[node name="SpeedDebugLabel" type="Label" parent="."]
+margin_left = 26.0
+margin_top = 31.0
+margin_right = 78.0
+margin_bottom = 45.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+
 [connection signal="goal_scored" from="." to="." method="_on_goal_scored"]
 [connection signal="goal_scored" from="." to="Ball" method="_on_goal_scored"]
 [connection signal="goal_scored" from="." to="RoundTimer" method="_on_goal_scored"]
@@ -187,8 +194,6 @@ stream = ExtResource( 10 )
 [connection signal="new_round_needed" from="." to="Jumbotron" method="_on_new_round_needed"]
 [connection signal="new_round_needed" from="." to="Ball" method="_on_new_round_needed"]
 [connection signal="ball_dropped" from="Jumbotron" to="Ball" method="_on_ball_dropped"]
-[connection signal="ball_dropped" from="Jumbotron" to="LeftPaddle" method="_on_ball_dropped"]
-[connection signal="ball_dropped" from="Jumbotron" to="RightPaddle" method="_on_ball_dropped"]
 [connection signal="ball_dropped" from="Jumbotron" to="RoundTimer" method="_on_ball_dropped"]
 [connection signal="new_round_needed" from="Jumbotron" to="." method="_on_new_round_needed"]
 [connection signal="new_round_needed" from="Jumbotron" to="Jumbotron" method="_on_new_round_needed"]
@@ -198,6 +203,4 @@ stream = ExtResource( 10 )
 [connection signal="pressed" from="Jumbotron/NewGameButton" to="Jumbotron" method="_on_NewGameButton_pressed"]
 [connection signal="body_entered" from="LeftGoal" to="." method="_on_LeftGoal_body_entered"]
 [connection signal="body_entered" from="RightGoal" to="." method="_on_RightGoal_body_entered"]
-[connection signal="timeout" from="RoundTimer" to="Ball" method="_on_RoundTimer_timeout"]
-[connection signal="timeout" from="RoundTimer" to="LeftPaddle" method="_on_RoundTimer_timeout"]
-[connection signal="timeout" from="RoundTimer" to="RightPaddle" method="_on_RoundTimer_timeout"]
+[connection signal="timeout" from="RoundTimer" to="." method="_on_RoundTimer_timeout"]
