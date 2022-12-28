@@ -1,16 +1,16 @@
 [gd_scene load_steps=24 format=2]
 
-[ext_resource path="res://ball.png" type="Texture" id=1]
-[ext_resource path="res://board.png" type="Texture" id=2]
-[ext_resource path="res://Ball.gd" type="Script" id=3]
-[ext_resource path="res://Paddle.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Jumbotron.gd" type="Script" id=5]
-[ext_resource path="res://pong.gd" type="Script" id=6]
-[ext_resource path="res://RoundTimer.gd" type="Script" id=7]
-[ext_resource path="res://Pong Font.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://Pong Font.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://images/ball.png" type="Texture" id=2]
+[ext_resource path="res://Jumbotron.gd" type="Script" id=3]
+[ext_resource path="res://Ball.gd" type="Script" id=4]
+[ext_resource path="res://RoundTimer.gd" type="Script" id=5]
+[ext_resource path="res://Pong.gd" type="Script" id=6]
+[ext_resource path="res://images/board.png" type="Texture" id=7]
+[ext_resource path="res://Paddle.tscn" type="PackedScene" id=8]
 [ext_resource path="res://audio/paddle.mp3" type="AudioStream" id=9]
-[ext_resource path="res://audio/wall.mp3" type="AudioStream" id=10]
-[ext_resource path="res://audio/goal.mp3" type="AudioStream" id=11]
+[ext_resource path="res://audio/goal.mp3" type="AudioStream" id=10]
+[ext_resource path="res://audio/wall.mp3" type="AudioStream" id=11]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 11.25, 54.5 )
@@ -20,19 +20,19 @@ extents = Vector2( 324.25, 6 )
 
 [sub_resource type="DynamicFont" id=8]
 size = 32
-font_data = ExtResource( 8 )
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=9]
 size = 32
-font_data = ExtResource( 8 )
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=10]
 size = 64
-font_data = ExtResource( 8 )
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=11]
 size = 48
-font_data = ExtResource( 8 )
+font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 0.862745, 0.407843, 0.407843, 1 )
@@ -41,7 +41,7 @@ bg_color = Color( 0.862745, 0.407843, 0.407843, 1 )
 
 [sub_resource type="DynamicFont" id=14]
 size = 96
-font_data = ExtResource( 8 )
+font_data = ExtResource( 1 )
 
 [sub_resource type="CircleShape2D" id=5]
 radius = 17.0
@@ -57,7 +57,7 @@ script = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 319, 241 )
-texture = ExtResource( 2 )
+texture = ExtResource( 7 )
 
 [node name="Arena" type="StaticBody2D" parent="."]
 
@@ -86,7 +86,7 @@ position = Vector2( 639, 448 )
 shape = SubResource( 2 )
 
 [node name="Jumbotron" type="Node2D" parent="."]
-script = ExtResource( 5 )
+script = ExtResource( 3 )
 
 [node name="Player1Score" type="Label" parent="Jumbotron"]
 margin_left = 258.0
@@ -136,12 +136,12 @@ custom_fonts/font = SubResource( 14 )
 text = "Game Over!"
 
 [node name="Ball" type="KinematicBody2D" parent="."]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="Ball"]
 position = Vector2( 323, 228 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
 position = Vector2( 323, 228 )
@@ -151,12 +151,12 @@ shape = SubResource( 5 )
 stream = ExtResource( 9 )
 
 [node name="HitWall" type="AudioStreamPlayer" parent="Ball"]
-stream = ExtResource( 10 )
+stream = ExtResource( 11 )
 
-[node name="LeftPaddle" parent="." instance=ExtResource( 4 )]
+[node name="LeftPaddle" parent="." instance=ExtResource( 8 )]
 position = Vector2( -451, -400 )
 
-[node name="RightPaddle" parent="." instance=ExtResource( 4 )]
+[node name="RightPaddle" parent="." instance=ExtResource( 8 )]
 position = Vector2( 130, -400 )
 
 [node name="LeftGoal" type="Area2D" parent="."]
@@ -172,10 +172,10 @@ position = Vector2( 643, 250.5 )
 shape = SubResource( 7 )
 
 [node name="RoundTimer" type="Timer" parent="."]
-script = ExtResource( 7 )
+script = ExtResource( 5 )
 
 [node name="Goal" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 11 )
+stream = ExtResource( 10 )
 
 [connection signal="goal_scored" from="." to="." method="_on_goal_scored"]
 [connection signal="goal_scored" from="." to="Ball" method="_on_goal_scored"]
